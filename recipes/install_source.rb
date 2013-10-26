@@ -49,7 +49,23 @@ git 'freeswitch_source_git' do
 #  notifies :run, 'bash[compile_freeswitch]'
 end
 
-bash 'compile_freeswitch' do
+bash 'bootstrap_freeswitch_source' do
   cwd '/srv/freeswitch'
-  command 'sh ./bootstrap.sh && ./configure --prefix=/opt/freeswitch/ && make && make all install cd-sounds-install cd-moh-install'
+  command 'sh ./bootstrap.sh'
 end
+
+bash 'configure_freeswitch_source' do
+  cwd '/srv/freeswitch'
+  command './configure --prefix=/opt/freeswitch/'
+end
+
+bash 'build_freeswitch_source' do
+  cwd '/srv/freeswitch'
+  command 'make'
+end
+
+bash 'install_freeswitch_and_sounds_and_stuff' do
+  cwd '/srv/freeswitch'
+  command 'make all install cd-sounds-install cd-moh-install'
+end
+
