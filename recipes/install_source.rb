@@ -61,13 +61,13 @@ execute 'configure_freeswitch_source' do
   creates '/srv/freeswitch/Makefile'
 end
 
-execute 'build_freeswitch_source' do
-  cwd '/srv/freeswitch'
-  command 'make'
-end
+#execute 'build_freeswitch_source' do
+#  cwd '/srv/freeswitch'
+#  command 'make'
+#end
 
-execute 'install_freeswitch_and_sounds_and_stuff' do
-  cwd '/srv/freeswitch'
-  command 'make all install cd-sounds-install cd-moh-install'
-end
+#execute 'install_freeswitch_and_sounds_and_stuff' do
+#  cwd '/srv/freeswitch'
+#  command 'make all install cd-sounds-install cd-moh-install'
+#end
 
