@@ -40,8 +40,8 @@ end
 # considering using the application cookbook / resource for this, keeping it simple for now
 
 git 'freeswitch_source_git' do
-#  path "#{Chef::Config[:file_cache_path]}/freeswitch"
-  path '/srv/freeswitch'
+#  destination "#{Chef::Config[:file_cache_path]}/freeswitch"
+  destination '/srv/freeswitch'
   repository node['freeswitch']['git_repository']
   reference  node['freeswitch']['git_revision']
   action :sync
