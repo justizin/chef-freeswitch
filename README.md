@@ -10,4 +10,4 @@
 
 # Author
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Justin Alan Ryan (<bitmonk@bitmonk.net>)
