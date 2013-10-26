@@ -64,7 +64,7 @@ end
 execute 'build_freeswitch_source' do
   cwd '/srv/freeswitch'
   command 'make'
-#  creates ''
+  creates '/srv/freeswitch/fs_cli' # should try to figure out the last file built to catch partially complete builds
 end
 
 #execute 'install_freeswitch_and_sounds_and_stuff' do
