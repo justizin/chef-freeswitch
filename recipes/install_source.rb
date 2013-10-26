@@ -22,6 +22,7 @@
 
 # Roughly following http://wiki.freeswitch.org/wiki/Linux_Quick_Install_Guide
 
+include_recipe 'git'
 include_recipe 'build-essential'
 
 # totally debuntufied and flat right now
