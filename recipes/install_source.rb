@@ -46,25 +46,25 @@ git 'freeswitch_source_git' do
   repository node['freeswitch']['git_repository']
   reference  node['freeswitch']['git_revision']
   action :sync
-#  notifies :run, 'bash[compile_freeswitch]'
+#  notifies :run, 'execute[compile_freeswitch]'
 end
 
-bash 'bootstrap_freeswitch_source' do
+execute 'bootstrap_freeswitch_source' do
   cwd '/srv/freeswitch'
   command 'sh ./bootstrap.sh'
 end
 
-bash 'configure_freeswitch_source' do
+execute 'configure_freeswitch_source' do
   cwd '/srv/freeswitch'
   command './configure --prefix=/opt/freeswitch/'
 end
 
-bash 'build_freeswitch_source' do
+execute 'build_freeswitch_source' do
   cwd '/srv/freeswitch'
   command 'make'
 end
 
-bash 'install_freeswitch_and_sounds_and_stuff' do
+execute 'install_freeswitch_and_sounds_and_stuff' do
   cwd '/srv/freeswitch'
   command 'make all install cd-sounds-install cd-moh-install'
 end
