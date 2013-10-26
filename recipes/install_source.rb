@@ -46,7 +46,7 @@ git 'freeswitch_source_git' do
   repository node['freeswitch']['git_repository']
   reference  node['freeswitch']['git_revision']
   action :sync
-  notifies :run, 'bash[compile_freeswitch]'
+#  notifies :run, 'bash[compile_freeswitch]'
 end
 
 bash 'compile_freeswitch' do
