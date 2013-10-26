@@ -52,11 +52,13 @@ end
 execute 'bootstrap_freeswitch_source' do
   cwd '/srv/freeswitch'
   command 'sh ./bootstrap.sh'
+  creates '/srv/freeswitch/configure'
 end
 
 execute 'configure_freeswitch_source' do
   cwd '/srv/freeswitch'
   command './configure --prefix=/opt/freeswitch/'
+  creates '/srv/freeswitch/Makefile'
 end
 
 execute 'build_freeswitch_source' do
