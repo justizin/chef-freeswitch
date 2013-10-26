@@ -37,13 +37,18 @@ package 'libncurses-dev'
   package pkgname
 end
 
-#git "#{Chef::Config[:file_cache_path]}/app_name" do
-#  repository node['freeswitch']['git_repository']
-#  reference  node['freeswitch']['git_revision']
-#  action :sync
-#  notifies :run, 'bash[compile_freeswitch]'
-#end
-#
-#bash 'compile_freeswitch' do
-#  command 'sh ./bootstrap.sh && ./configure --prefix=/opt/freeswitch/ && make && make all install cd-sounds-install cd-moh-install'
-#end
+# considering using the application cookbook / resource for this, keeping it simple for now
+
+git 'freeswitch_source_git' do
+#  path "#{Chef::Config[:file_cache_path]}/freeswitch"
+  path '/srv/freeswitch'
+  repository node['freeswitch']['git_repository']
+  reference  node['freeswitch']['git_revision']
+  action :sync
+  notifies :run, 'bash[compile_freeswitch]'
+end
+
+bash 'compile_freeswitch' do
+  cwd '/srv/freeswitch'
+  command 'sh ./bootstrap.sh && ./configure --prefix=/opt/freeswitch/ && make && make all install cd-sounds-install cd-moh-install'
+end
