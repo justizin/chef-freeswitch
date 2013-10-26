@@ -32,7 +32,7 @@ package 'libncurses-dev'
 # deps for optional features
 
 %w{ libcurl4-openssl-dev libexpat1-dev libssl-dev libtiff4-dev libx11-dev unixodbc-dev
-    python2.6-dev zlib1g-dev libzrtpcpp-dev libasound2-dev libogg-dev libvorbis-dev libperl-dev
+    python-dev zlib1g-dev libzrtpcpp-dev libasound2-dev libogg-dev libvorbis-dev libperl-dev
     libgdbm-dev libdb-dev python-dev uuid-dev bison autoconf g++ libncurses-dev }.each do |pkgname|
   package pkgname
 end
