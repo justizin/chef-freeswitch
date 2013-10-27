@@ -1,3 +1,5 @@
 default[:freeswitch][:git_repository] = 'git://git.freeswitch.org/freeswitch.git'
 default[:freeswitch][:git_revision] = 'master'
-
+default[:freeswitch][:base_dir] = '/srv/freeswitch'
+default[:freeswitch][:inst_dir] = '/opt/freeswitch'
+default[:freeswitch][:src_dir] = '/usr/local/src/freeswitch'

@@ -38,10 +38,14 @@ package 'libncurses-dev'
   package pkgname
 end
 
+fsbase = node[:freeswitch][:base_dir]
+fsinst = node[:freeswitch][:install_dir]
+fssrc = node[:freeswitch][:src_dir]
+
 # considering using the application cookbook / resource for this, keeping it simple for now
 
 git 'freeswitch_source_git' do
-  destination '/srv/freeswitch'
+  destination fssrc
   repository  node['freeswitch']['git_repository']
   reference   node['freeswitch']['git_revision']
   action      :sync
@@ -49,25 +53,25 @@ git 'freeswitch_source_git' do
 end
 
 execute 'bootstrap_freeswitch_source' do
-  cwd     '/srv/freeswitch'
+  cwd     fssrc
   command 'sh ./bootstrap.sh'
   creates '/srv/freeswitch/configure'
 end
 
 execute 'configure_freeswitch_source' do
-  cwd     '/srv/freeswitch'
-  command './configure --prefix=/opt/freeswitch/'
+  cwd     fssrc
+  command "./configure --prefix=#{fsinst}"
   creates '/srv/freeswitch/Makefile'
 end
 
 execute 'build_freeswitch_source' do
-  cwd     '/srv/freeswitch'
+  cwd     fssrc
   command 'make'
   creates '/srv/freeswitch/fs_cli' # should try to figure out the last file built to catch partially complete builds
 end
 
 execute 'install_freeswitch_and_sounds_and_stuff' do
-  cwd     '/srv/freeswitch'
+  cwd     fssrc
   command 'make all install cd-sounds-install cd-moh-install'
   creates '/opt/freeswitch'
 end
