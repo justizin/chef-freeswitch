@@ -41,34 +41,33 @@ end
 # considering using the application cookbook / resource for this, keeping it simple for now
 
 git 'freeswitch_source_git' do
-#  destination "#{Chef::Config[:file_cache_path]}/freeswitch"
   destination '/srv/freeswitch'
-  repository node['freeswitch']['git_repository']
-  reference  node['freeswitch']['git_revision']
-  action :sync
+  repository  node['freeswitch']['git_repository']
+  reference   node['freeswitch']['git_revision']
+  action      :sync
 #  notifies :run, 'execute[compile_freeswitch]'
 end
 
 execute 'bootstrap_freeswitch_source' do
-  cwd '/srv/freeswitch'
+  cwd     '/srv/freeswitch'
   command 'sh ./bootstrap.sh'
   creates '/srv/freeswitch/configure'
 end
 
 execute 'configure_freeswitch_source' do
-  cwd '/srv/freeswitch'
+  cwd     '/srv/freeswitch'
   command './configure --prefix=/opt/freeswitch/'
   creates '/srv/freeswitch/Makefile'
 end
 
 execute 'build_freeswitch_source' do
-  cwd '/srv/freeswitch'
+  cwd     '/srv/freeswitch'
   command 'make'
   creates '/srv/freeswitch/fs_cli' # should try to figure out the last file built to catch partially complete builds
 end
 
 #execute 'install_freeswitch_and_sounds_and_stuff' do
-#  cwd '/srv/freeswitch'
+#  cwd     '/srv/freeswitch'
 #  command 'make all install cd-sounds-install cd-moh-install'
 #end
 
